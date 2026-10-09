@@ -105,7 +105,7 @@
 ## Grouped Split & Leakage Measurement
 - **Heuristic**: Per-country filename-sorted phash clustering (threshold=10, hash_size=8)
 - **Seed**: 42
-- **Ratios**: train=0.70, val=0.15, test=0.15
+- **Ratios**: train=0.7, val=0.15, test=0.15
 - **Split Counts**:
   - train: 26,871 images
   - val: 5,756 images
