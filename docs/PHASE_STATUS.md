@@ -4,7 +4,7 @@ Tick only when the verification report `docs/verification/phase-NN.md` is all PA
 - [x] Phase 0: Repo standards
 - [x] Phase 1: Data hardening
 - [x] Phase 2: Training
-- [ ] Phase 3: Evaluation + Chennai OOD
+- [x] Phase 3: Evaluation + Chennai OOD
 - [ ] Phase 4: Perception + inputs
 - [ ] Phase 5: Analysis
 - [ ] Phase 6: Priority + OSM

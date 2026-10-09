@@ -1,0 +1,15 @@
+{
+    "metadata": {
+        "model_hash": "93595a2689c432e9e82ce747d855aed64596cec86ce85e9bbc743aa3040d26c3",
+        "split_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "config": "chennai",
+        "git_commit": "0723e6f",
+        "date": "2026-10-09T17:25:47Z",
+        "thresholds": {
+            "conf": 0.25,
+            "iou": 0.7
+        }
+    },
+    "overall": {},
+    "per_country": {}
+}
