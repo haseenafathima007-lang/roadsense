@@ -1,3 +1,4 @@
+
 # Patch Class Integration Plan
 
 ## Objective
@@ -24,3 +25,4 @@ The script will:
 4. Update `data.yaml` to include `nc: 5` and add `patch` to the names list.
 
 (A merge script is implemented in `scripts/merge_patch_class.py`.)
+
