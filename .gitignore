@@ -1,0 +1,33 @@
+# Java
+target/
+*.class
+*.jar
+.mvn/wrapper/maven-wrapper.jar
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+# Models, data, runs (never commit)
+*.pt
+*.onnx
+*.weights
+runs/
+data/*
+!data/README.md
+sample-data/private/
+# Local state
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

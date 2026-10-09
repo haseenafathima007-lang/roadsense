@@ -1,0 +1,32 @@
+# All values are STARTING ASSUMPTIONS. Keep "UNVALIDATED" until measured (design §5.3, §13).
+# null = required value not supplied yet; the agent must STOP and ask the user (see AGENTS.md).
+severity:
+  # Copy from the main document §5 (area-ratio thresholds and escalation rules).
+  area_ratio_low_max: null      # UNVALIDATED / TODO from main document
+  area_ratio_medium_max: null   # UNVALIDATED / TODO from main document
+dedup:
+  match_radius_m: 15            # UNVALIDATED
+  accuracy_factor: 1.0          # UNVALIDATED
+  max_radius_m: 40              # UNVALIDATED
+  manual_pin_radius_m: 30       # UNVALIDATED
+  min_similarity: 0.60          # UNVALIDATED
+quality:
+  min_width_px: 640             # UNVALIDATED
+  min_height_px: 480            # UNVALIDATED
+  min_blur_laplacian_var: 100.0 # UNVALIDATED
+  min_mean_luma: 40             # UNVALIDATED
+  max_mean_luma: 225            # UNVALIDATED
+  edge_touch_margin_px: 4       # UNVALIDATED (truncated-box test)
+verify:
+  visit_radius_m: 25            # UNVALIDATED
+  min_scene_similarity: 0.55    # UNVALIDATED
+  clear_conf: 0.25              # UNVALIDATED
+survey:
+  min_photos_per_segment: 3     # UNVALIDATED
+  target_spacing_m: 10          # UNVALIDATED
+priority:
+  # severity x road weight x exposure x recurrence. Weights are starting assumptions.
+  road_class_weight: {motorway: null, trunk: null, primary: null, secondary: null, tertiary: null, residential: null}  # TODO
+  recurrence_step: null         # TODO
+detector:
+  min_conf: 0.25                # UNVALIDATED
