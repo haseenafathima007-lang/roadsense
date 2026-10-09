@@ -18,3 +18,7 @@ Agents: before adding a dependency, check current version, licence, maintenance,
 | google-java-format | Java source code formatter | 1.24.0 | Apache-2.0 | 2026-10-09 | Google Java Style formatting engine used by Spotless |
 | Ruff | Python linter and formatter | >=0.8.0 | MIT / Apache-2.0 | 2026-10-09 | Fast Rust-based linter, configured in pyproject.toml |
 | Pytest | Python test framework | >=8.0.0 | MIT | 2026-10-09 | Standard test runner, configured in pyproject.toml |
+| Pillow | Image dimensions and validation | >=10.0.0 | HPND | 2026-10-09 | Used in data hardening |
+| ImageHash | Perceptual hashing for dataset split grouping | >=4.3.0 | BSD 2-Clause | 2026-10-09 | Prevents sequence leakage |
+| tqdm | Progress bar for data scripts | >=4.66.0 | MIT/MPLv2 | 2026-10-09 | Dev tool |
+| PyYAML | YAML serialisation for data.yaml in convert_to_yolo.py | 6.0.3 | MIT | 2026-10-09 | Stdlib-compatible |
