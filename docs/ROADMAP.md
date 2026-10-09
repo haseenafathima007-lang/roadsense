@@ -17,3 +17,6 @@
 
 Decision gate (after phases 4-9 pass): pure-Java ONNX inference (design §8). Otherwise keep RemoteYoloDetector.
 Phases 1-3 (Python/data) and 4-5 (Java with FakeDetector) can run in parallel if you have two working branches.
+
+### Phase 5 notes
+- Introduce union-area damage index calculation in Java domain logic.
