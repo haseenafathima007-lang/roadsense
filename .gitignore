@@ -16,7 +16,8 @@ venv/
 *.pt
 *.onnx
 *.weights
-runs/
+**/runs/
+**/runs_smoke/
 data/*
 !data/README.md
 sample-data/private/

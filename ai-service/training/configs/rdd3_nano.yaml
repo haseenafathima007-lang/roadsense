@@ -1,0 +1,11 @@
+# RDD3 Nano config for 2-hour budget
+model: "yolov8n.pt"
+data: "data/processed/yolo_rdd3/data.yaml"
+epochs: 10
+fraction: 0.1
+imgsz: 640
+batch: 16
+device: "mps"
+project: "runs"
+name: "rdd3_nano_2hr"
+seed: 42
