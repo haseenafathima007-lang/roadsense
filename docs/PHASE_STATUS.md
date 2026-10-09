@@ -2,7 +2,7 @@
 Tick only when the verification report `docs/verification/phase-NN.md` is all PASS.
 
 - [x] Phase 0: Repo standards
-- [ ] Phase 1: Data hardening
+- [x] Phase 1: Data hardening
 - [ ] Phase 2: Training
 - [ ] Phase 3: Evaluation + Chennai OOD
 - [ ] Phase 4: Perception + inputs

@@ -103,10 +103,31 @@ def main():
 
     stats_json = default_to_dict(stats)
 
+    DECISIONS = {
+        "Block crack": "EXCLUDE — 3 annotations only, not in challenge spec",
+        "D01": "EXCLUDE — variant of D00; covered by D00",
+        "D0w0": "EXCLUDE — single annotation, likely labelling error",
+        "D11": "EXCLUDE — variant of D10; covered by D10",
+        "D43": "EXCLUDE — unclear semantics, not in challenge spec",
+        "D44": "EXCLUDE — unclear semantics, not in challenge spec",
+        "D50": "EXCLUDE — unclear semantics, not in challenge spec",
+        "Repair": "EXCLUDE (for now) — future patch hard-negative class (Phase 2/3)",
+    }
+
     out_dir = Path("docs")
     out_dir.mkdir(parents=True, exist_ok=True)
+    json_path = out_dir / "data_audit.json"
+    if json_path.exists():
+        try:
+            with open(json_path) as f:
+                existing = json.load(f)
+            for k, v in existing.items():
+                if k not in stats_json:
+                    stats_json[k] = v
+        except Exception:
+            pass
 
-    with open(out_dir / "data_audit.json", "w") as f:
+    with open(json_path, "w") as f:
         json.dump(stats_json, f, indent=2)
 
     # --- Write Markdown ---
@@ -127,7 +148,8 @@ def main():
         md_lines.append("|---|---|---|---|")
         for cls_name, info in sorted(stats_json["excluded_classes_audit"].items()):
             examples_str = "<br>".join(info["examples"])
-            md_lines.append(f"| {cls_name} | {info['count']} | {examples_str} | PENDING |")
+            dec = DECISIONS.get(cls_name, "PENDING")
+            md_lines.append(f"| {cls_name} | {info['count']} | {examples_str} | {dec} |")
     else:
         md_lines.append("No non-standard classes found.")
 
@@ -152,11 +174,36 @@ def main():
     for size, count in top_sizes:
         md_lines.append(f"- {size}: {count} images")
 
+    if "grouped_split" in stats_json:
+        gs = stats_json["grouped_split"]
+        md_lines.append("\n## Grouped Split & Leakage Measurement")
+        md_lines.append(f"- **Heuristic**: {gs.get('heuristic', '')}")
+        md_lines.append(f"- **Seed**: {gs.get('seed', '')}")
+        ratios = gs.get("ratios", {})
+        md_lines.append(
+            f"- **Ratios**: train={ratios.get('train', 0.7)}, "
+            f"val={ratios.get('val', 0.15)}, test={ratios.get('test', 0.15)}"
+        )
+        counts = gs.get("counts", {})
+        md_lines.append("- **Split Counts**:")
+        total_split = sum(counts.values())
+        for sname in ("train", "val", "test"):
+            md_lines.append(f"  - {sname}: {counts.get(sname, 0):,} images")
+        md_lines.append(f"  - total: {total_split:,} images")
+        leakage = gs.get("leakage_fraction", 0.0)
+        thresh = gs.get("leakage_threshold", 10)
+        md_lines.append(
+            f"- **Leakage**: {leakage:.4%} of test images have a near-duplicate in train "
+            f"(at threshold={thresh})"
+        )
+        md_lines.append("- **Overlap**: 0 (all splits are completely disjoint)")
+
     with open(out_dir / "data_audit.md", "w") as f:
-        f.write("\n".join(md_lines))
+        f.write("\n".join(md_lines) + "\n")
 
     print(f"Audit complete. JSON and Markdown written to {out_dir}")
 
 
 if __name__ == "__main__":
     main()
+

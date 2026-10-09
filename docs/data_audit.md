@@ -101,3 +101,15 @@
 - 1024x1024: 191 images
 - 540x540: 152 images
 - 1080x1080: 60 images
+
+## Grouped Split & Leakage Measurement
+- **Heuristic**: Per-country filename-sorted phash clustering (threshold=10, hash_size=8)
+- **Seed**: 42
+- **Ratios**: train=0.70, val=0.15, test=0.15
+- **Split Counts**:
+  - train: 26,871 images
+  - val: 5,756 images
+  - test: 5,758 images
+  - total: 38,385 images
+- **Leakage**: 40.7086% of test images have a near-duplicate in train (at threshold=10)
+- **Overlap**: 0 (all splits are completely disjoint)

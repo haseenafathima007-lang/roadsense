@@ -20915,5 +20915,26 @@
     "United_States/test",
     "Japan/test",
     "India/test"
-  ]
+  ],
+  "grouped_split": {
+    "heuristic": "Per-country filename-sorted phash clustering (threshold=10, hash_size=8)",
+    "seed": 42,
+    "ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "counts": {
+      "train": 26871,
+      "val": 5756,
+      "test": 5758
+    },
+    "split_hashes": {
+      "train": "d8dddb7c2a4c54f66401a661a96e5af86ad8c2a342510eea950b11f45b81775d",
+      "val": "3e03c3011d9c003b14053e6c8438faa84682cb46f37890c68dcec892f99f03f3",
+      "test": "b452ad6c533d25816dd7b8a91875d84ab7a7609d652133340af2228286c00045"
+    },
+    "leakage_threshold": 10,
+    "leakage_fraction": 0.407086
+  }
 }
