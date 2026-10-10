@@ -1,9 +1,14 @@
 # All values are STARTING ASSUMPTIONS. Keep "UNVALIDATED" until measured (design §5.3, §13).
 # null = required value not supplied yet; the agent must STOP and ask the user (see AGENTS.md).
 severity:
-  # Copy from the main document §5 (area-ratio thresholds and escalation rules).
-  area_ratio_low_max: null      # UNVALIDATED / TODO from main document
-  area_ratio_medium_max: null   # UNVALIDATED / TODO from main document
+  # UNVALIDATED starting assumption (replace with main document §5 when available)
+  area_ratio_low_max: 0.05      # UNVALIDATED starting assumption (replace with main document §5 when available)
+  area_ratio_medium_max: 0.15   # UNVALIDATED starting assumption (replace with main document §5 when available)
+  # Escalation: damage type -> +N severity levels, capped at HIGH.
+  # UNVALIDATED starting assumption (replace with main document §5 when available)
+  escalation_pothole: 1         # UNVALIDATED starting assumption (replace with main document §5 when available)
+  escalation_alligator: 1       # UNVALIDATED starting assumption (replace with main document §5 when available)
+  escalation_linear_crack: 0    # UNVALIDATED starting assumption (replace with main document §5 when available)
 dedup:
   match_radius_m: 15            # UNVALIDATED
   accuracy_factor: 1.0          # UNVALIDATED
