@@ -14,6 +14,7 @@ import com.roadai.domain.LongitudinalCrack;
 import com.roadai.domain.Observation;
 import com.roadai.domain.Pothole;
 import com.roadai.domain.SeverityLevel;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,13 +28,47 @@ class SeverityStrategyTest {
   void setUp() {
     thresholds =
         new Thresholds(
-            0.05, // severityAreaRatioLowMax
-            0.15, // severityAreaRatioMediumMax
-            1, // severityEscalationPothole
-            1, // severityEscalationAlligator
-            0, // severityEscalationLinearCrack
-            15.0, 1.0, 40.0, 30.0, 0.70, 640, 480, 100.0, 40, 220, 10, 15.0, 0.65, 0.25, 3, 20.0,
-            0.25);
+            0.05,
+            0.15,
+            1,
+            1,
+            0,
+            15.0,
+            1.0,
+            40.0,
+            30.0,
+            0.70,
+            640,
+            480,
+            100.0,
+            40,
+            220,
+            10,
+            15.0,
+            0.65,
+            0.25,
+            3,
+            20.0,
+            0.25,
+            // priority — UNVALIDATED starting assumptions
+            Map.of(
+                "motorway",
+                3.0,
+                "trunk",
+                2.5,
+                "primary",
+                2.0,
+                "secondary",
+                1.5,
+                "tertiary",
+                1.2,
+                "residential",
+                1.0),
+            0.2,
+            0.2,
+            1.0,
+            50.0,
+            10);
     severityStrategy = new AreaRatioSeverity(thresholds);
   }
 

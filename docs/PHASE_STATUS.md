@@ -7,7 +7,7 @@ Tick only when the verification report `docs/verification/phase-NN.md` is all PA
 - [x] Phase 3: Evaluation + Chennai OOD
 - [x] Phase 4: Perception + inputs
 - [x] Phase 5: Analysis
-- [ ] Phase 6: Priority + OSM
+- [x] Phase 6: Priority + OSM
 - [ ] Phase 7: Persistence + roles + pipeline
 - [ ] Phase 8: UI
 - [ ] Phase 9: Verification

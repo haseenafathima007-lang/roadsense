@@ -1,6 +1,8 @@
 package com.roadai.config;
 
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
@@ -26,7 +28,14 @@ public record Thresholds(
     Double verifyClearConf,
     Integer surveyMinPhotosPerSegment,
     Double surveyTargetSpacingM,
-    Double detectorMinConf) {
+    Double detectorMinConf,
+    // Priority weights — UNVALIDATED starting assumptions
+    Map<String, Double> priorityRoadClassWeights,
+    Double priorityRecurrenceStep,
+    Double priorityCorroborationStep,
+    Double priorityExposureDefault,
+    Double prioritySnapMaxDistanceM,
+    Integer priorityTopN) {
 
   public static Thresholds load(InputStream yamlStream) {
     Yaml yaml = new Yaml();
@@ -54,7 +63,36 @@ public record Thresholds(
         getDouble(root, "verify", "clear_conf"),
         getInteger(root, "survey", "min_photos_per_segment"),
         getDouble(root, "survey", "target_spacing_m"),
-        getDouble(root, "detector", "min_conf"));
+        getDouble(root, "detector", "min_conf"),
+        getRoadClassWeights(root),
+        getDouble(root, "priority", "recurrence_step"),
+        getDouble(root, "priority", "corroboration_step"),
+        getDouble(root, "priority", "exposure_default"),
+        getDouble(root, "priority", "snap_max_distance_m"),
+        getInteger(root, "priority", "top_n_stability"));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Map<String, Double> getRoadClassWeights(Map<String, Object> root) {
+    Object section = root.get("priority");
+    if (!(section instanceof Map<?, ?> secMap)) {
+      throw new IllegalStateException("Missing section: priority");
+    }
+    Object weights = ((Map<String, Object>) secMap).get("road_class_weight");
+    if (!(weights instanceof Map<?, ?> wMap)) {
+      throw new IllegalStateException("Missing key: priority.road_class_weight");
+    }
+    Map<String, Object> rawWeights = (Map<String, Object>) wMap;
+    Map<String, Double> result = new LinkedHashMap<>();
+    for (Map.Entry<String, Object> e : rawWeights.entrySet()) {
+      if (e.getValue() instanceof Number n) {
+        result.put(e.getKey(), n.doubleValue());
+      } else {
+        throw new IllegalStateException(
+            "priority.road_class_weight." + e.getKey() + " is null or non-numeric");
+      }
+    }
+    return Collections.unmodifiableMap(result);
   }
 
   private static Double getDouble(Map<String, Object> root, String section, String key) {
