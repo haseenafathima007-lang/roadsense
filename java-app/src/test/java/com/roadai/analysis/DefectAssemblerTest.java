@@ -40,12 +40,47 @@ class DefectAssemblerTest {
   void setUp() {
     thresholds =
         new Thresholds(
-            0.05, 0.15, 1, 1, 0, 15.0, // match_radius_m
-            1.0, // accuracy_factor
-            40.0, // max_radius_m
-            30.0, // manual_pin_radius_m
-            0.70, // min_similarity
-            640, 480, 100.0, 40, 220, 10, 15.0, 0.65, 0.25, 3, 20.0, 0.25);
+            0.05,
+            0.15,
+            1,
+            1,
+            0,
+            15.0,
+            1.0,
+            40.0,
+            30.0,
+            0.70,
+            640,
+            480,
+            100.0,
+            40,
+            220,
+            10,
+            15.0,
+            0.65,
+            0.25,
+            3,
+            20.0,
+            0.25,
+            // priority — UNVALIDATED starting assumptions
+            Map.of(
+                "motorway",
+                3.0,
+                "trunk",
+                2.5,
+                "primary",
+                2.0,
+                "secondary",
+                1.5,
+                "tertiary",
+                1.2,
+                "residential",
+                1.0),
+            0.2,
+            0.2,
+            1.0,
+            50.0,
+            10);
     orientationClassifier = new CrackOrientationClassifier();
     imageMap = new HashMap<>();
   }

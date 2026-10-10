@@ -31,7 +31,18 @@ survey:
   target_spacing_m: 10          # UNVALIDATED
 priority:
   # severity x road weight x exposure x recurrence. Weights are starting assumptions.
-  road_class_weight: {motorway: null, trunk: null, primary: null, secondary: null, tertiary: null, residential: null}  # TODO
-  recurrence_step: null         # TODO
+  # UNVALIDATED starting assumption (replace with measured values when available)
+  road_class_weight:
+    motorway: 3.0       # UNVALIDATED starting assumption
+    trunk: 2.5          # UNVALIDATED starting assumption
+    primary: 2.0        # UNVALIDATED starting assumption
+    secondary: 1.5      # UNVALIDATED starting assumption
+    tertiary: 1.2       # UNVALIDATED starting assumption
+    residential: 1.0    # UNVALIDATED starting assumption
+  recurrence_step: 0.2          # UNVALIDATED starting assumption
+  corroboration_step: 0.2       # UNVALIDATED starting assumption
+  exposure_default: 1.0         # UNVALIDATED starting assumption (neutral placeholder)
+  snap_max_distance_m: 50.0     # UNVALIDATED starting assumption
+  top_n_stability: 10           # UNVALIDATED starting assumption
 detector:
   min_conf: 0.25                # UNVALIDATED

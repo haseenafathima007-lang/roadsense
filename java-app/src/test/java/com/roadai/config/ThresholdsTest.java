@@ -42,6 +42,19 @@ class ThresholdsTest {
               target_spacing_m: 10
             detector:
               min_conf: 0.25
+            priority:
+              road_class_weight:
+                motorway: 3.0
+                trunk: 2.5
+                primary: 2.0
+                secondary: 1.5
+                tertiary: 1.2
+                residential: 1.0
+              recurrence_step: 0.2
+              corroboration_step: 0.2
+              exposure_default: 1.0
+              snap_max_distance_m: 50.0
+              top_n_stability: 10
             """;
 
     InputStream is = new ByteArrayInputStream(yaml.getBytes(StandardCharsets.UTF_8));
@@ -55,6 +68,9 @@ class ThresholdsTest {
     assertThat(thresholds.dedupMatchRadiusM()).isEqualTo(15.0);
     assertThat(thresholds.qualityMinWidthPx()).isEqualTo(640);
     assertThat(thresholds.detectorMinConf()).isEqualTo(0.25);
+    assertThat(thresholds.priorityRoadClassWeights()).containsEntry("motorway", 3.0);
+    assertThat(thresholds.priorityRecurrenceStep()).isEqualTo(0.2);
+    assertThat(thresholds.priorityTopN()).isEqualTo(10);
   }
 
   @Test

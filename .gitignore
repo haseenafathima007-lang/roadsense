@@ -33,3 +33,7 @@ sample-data/private/
 *.iml
 .DS_Store
 Thumbs.db
+
+# OSM extracts — never commit; fetch_osm.py output
+data/osm/*.geojson
+data/osm/*.json
