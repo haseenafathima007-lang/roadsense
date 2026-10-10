@@ -22,3 +22,10 @@ Agents: before adding a dependency, check current version, licence, maintenance,
 | ImageHash | Perceptual hashing for dataset split grouping | >=4.3.0 | BSD 2-Clause | 2026-10-09 | Prevents sequence leakage |
 | tqdm | Progress bar for data scripts | >=4.66.0 | MIT/MPLv2 | 2026-10-09 | Dev tool |
 | PyYAML | YAML serialisation for data.yaml in convert_to_yolo.py | 6.0.3 | MIT | 2026-10-09 | Stdlib-compatible |
+| FastAPI | Python detection service | 0.143.0 | MIT | 2026-10-10 | |
+| Starlette | ASGI framework (FastAPI dep) | 1.7.0 | BSD 3-Clause | 2026-10-10 | |
+| Uvicorn | ASGI server | 0.54.0 | BSD 3-Clause | 2026-10-10 | |
+| python-multipart | Multipart form parsing | 0.0.32 | Apache-2.0 | 2026-10-10 | |
+| httpx | Async HTTP client (tests) | 0.28.1 | BSD 3-Clause | 2026-10-10 | |
+| metadata-extractor | EXIF reading in Java | 2.19.0 | Apache-2.0 | 2026-10-10 | |
+| snakeyaml | YAML config loading in Java | 2.4 | Apache-2.0 | 2026-10-10 | |
