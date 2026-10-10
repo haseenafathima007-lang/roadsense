@@ -63,7 +63,7 @@ public class RemoteYoloDetector implements DamageDetector {
       HttpResponse<String> response =
           httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-      return parseResponse(response);
+      return parseResponse(response, image);
 
     } catch (IOException | InterruptedException e) {
       throw new ApiException("Failed to communicate with detection service", e);
@@ -71,7 +71,8 @@ public class RemoteYoloDetector implements DamageDetector {
   }
 
   @SuppressWarnings("unchecked")
-  private List<Observation> parseResponse(HttpResponse<String> response) throws ApiException {
+  private List<Observation> parseResponse(HttpResponse<String> response, Path image)
+      throws ApiException {
     Yaml yaml = new Yaml();
     Map<String, Object> body;
     try {
@@ -103,6 +104,7 @@ public class RemoteYoloDetector implements DamageDetector {
     List<Map<String, Object>> detections = (List<Map<String, Object>>) body.get("detections");
 
     if (detections != null) {
+      String fileHash = image.getFileName().toString().replaceFirst("[.][^.]+$", "");
       for (Map<String, Object> det : detections) {
         String clsName = String.valueOf(det.get("class"));
         DamageClass damageClass = mapClass(clsName);
@@ -117,7 +119,7 @@ public class RemoteYoloDetector implements DamageDetector {
                 bbox.get(2).intValue(),
                 bbox.get(3).intValue());
 
-        observations.add(new Observation(damageClass, conf, box, frameW, frameH));
+        observations.add(new Observation(fileHash, damageClass, conf, box, frameW, frameH));
       }
     }
 

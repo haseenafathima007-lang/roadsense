@@ -29,3 +29,5 @@ Agents: before adding a dependency, check current version, licence, maintenance,
 | httpx | Async HTTP client (tests) | 0.28.1 | BSD 3-Clause | 2026-10-10 | |
 | metadata-extractor | EXIF reading in Java | 2.19.0 | Apache-2.0 | 2026-10-10 | |
 | snakeyaml | YAML config loading in Java | 2.4 | Apache-2.0 | 2026-10-10 | |
+| PerceptualHashSimilarity | pure-Java perceptual image hashing fallback | JDK standard (java.awt) | GPLv2 with Classpath Exception | 2026-10-10 | Zero native dependencies, pure Java dHash fallback |
+

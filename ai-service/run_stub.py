@@ -1,6 +1,7 @@
 import uvicorn
-from app.main import app
+
 from app.detector import StubDetector, get_detector
+from app.main import app
 
 app.dependency_overrides[get_detector] = lambda: StubDetector()
 

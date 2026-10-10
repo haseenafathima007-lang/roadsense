@@ -14,6 +14,12 @@ class ThresholdsTest {
   void loadsValidYaml() {
     String yaml =
         """
+            severity:
+              area_ratio_low_max: 0.05
+              area_ratio_medium_max: 0.15
+              escalation_pothole: 1
+              escalation_alligator: 1
+              escalation_linear_crack: 0
             dedup:
               match_radius_m: 15
               accuracy_factor: 1.0
@@ -41,6 +47,11 @@ class ThresholdsTest {
     InputStream is = new ByteArrayInputStream(yaml.getBytes(StandardCharsets.UTF_8));
     Thresholds thresholds = Thresholds.load(is);
 
+    assertThat(thresholds.severityAreaRatioLowMax()).isEqualTo(0.05);
+    assertThat(thresholds.severityAreaRatioMediumMax()).isEqualTo(0.15);
+    assertThat(thresholds.severityEscalationPothole()).isEqualTo(1);
+    assertThat(thresholds.severityEscalationAlligator()).isEqualTo(1);
+    assertThat(thresholds.severityEscalationLinearCrack()).isEqualTo(0);
     assertThat(thresholds.dedupMatchRadiusM()).isEqualTo(15.0);
     assertThat(thresholds.qualityMinWidthPx()).isEqualTo(640);
     assertThat(thresholds.detectorMinConf()).isEqualTo(0.25);
@@ -53,34 +64,34 @@ class ThresholdsTest {
 
     assertThatThrownBy(() -> Thresholds.load(is))
         .isInstanceOf(IllegalStateException.class)
-        .hasMessageContaining("Missing section: dedup");
+        .hasMessageContaining("Missing section: severity");
   }
 
   @Test
   void throwsOnMissingKey() {
     String yaml =
         """
-            dedup:
-              match_radius_m: 15
-            """; // Missing other dedup keys
+            severity:
+              area_ratio_low_max: 0.05
+            """; // Missing other severity keys
     InputStream is = new ByteArrayInputStream(yaml.getBytes(StandardCharsets.UTF_8));
 
     assertThatThrownBy(() -> Thresholds.load(is))
         .isInstanceOf(IllegalStateException.class)
-        .hasMessageContaining("Missing key: dedup.accuracy_factor");
+        .hasMessageContaining("Missing key: severity.area_ratio_medium_max");
   }
 
   @Test
   void throwsOnNullValue() {
     String yaml =
         """
-            dedup:
-              match_radius_m: null
+            severity:
+              area_ratio_low_max: null
             """;
     InputStream is = new ByteArrayInputStream(yaml.getBytes(StandardCharsets.UTF_8));
 
     assertThatThrownBy(() -> Thresholds.load(is))
         .isInstanceOf(IllegalStateException.class)
-        .hasMessageContaining("Value is null for key: dedup.match_radius_m");
+        .hasMessageContaining("Value is null for key: severity.area_ratio_low_max");
   }
 }

@@ -3,8 +3,14 @@ package com.roadai.domain;
 import java.util.Objects;
 
 public record Observation(
-    DamageClass damageClass, double confidence, BoundingBox box, int frameW, int frameH) {
+    String fileHash,
+    DamageClass damageClass,
+    double confidence,
+    BoundingBox box,
+    int frameW,
+    int frameH) {
   public Observation {
+    Objects.requireNonNull(fileHash, "File hash cannot be null");
     Objects.requireNonNull(damageClass, "Damage class cannot be null");
     Objects.requireNonNull(box, "Bounding box cannot be null");
     if (confidence < 0.0 || confidence > 1.0) {
@@ -16,5 +22,10 @@ public record Observation(
     if (box.x2() > frameW || box.y2() > frameH) {
       throw new IllegalArgumentException("Bounding box exceeds frame dimensions");
     }
+  }
+
+  public Observation(
+      DamageClass damageClass, double confidence, BoundingBox box, int frameW, int frameH) {
+    this("unspecified-hash", damageClass, confidence, box, frameW, frameH);
   }
 }

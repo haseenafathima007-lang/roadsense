@@ -5,6 +5,11 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 public record Thresholds(
+    Double severityAreaRatioLowMax,
+    Double severityAreaRatioMediumMax,
+    Integer severityEscalationPothole,
+    Integer severityEscalationAlligator,
+    Integer severityEscalationLinearCrack,
     Double dedupMatchRadiusM,
     Double dedupAccuracyFactor,
     Double dedupMaxRadiusM,
@@ -28,6 +33,11 @@ public record Thresholds(
     Map<String, Object> root = yaml.load(yamlStream);
 
     return new Thresholds(
+        getDouble(root, "severity", "area_ratio_low_max"),
+        getDouble(root, "severity", "area_ratio_medium_max"),
+        getInteger(root, "severity", "escalation_pothole"),
+        getInteger(root, "severity", "escalation_alligator"),
+        getInteger(root, "severity", "escalation_linear_crack"),
         getDouble(root, "dedup", "match_radius_m"),
         getDouble(root, "dedup", "accuracy_factor"),
         getDouble(root, "dedup", "max_radius_m"),
